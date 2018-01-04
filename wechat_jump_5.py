@@ -19,8 +19,7 @@ class WeChatJump(object):
             os.mkdir('./pictures')
         self.font = ImageFont.truetype("./EurostileLTStd.otf", 13)
         self.base_path = os.getcwd()
-        self.screen = pygame.display.set_mode((394, 700), 0, 32)
-        self.__getScreen()
+        self.screen = pygame.display.set_mode(self.__getScreen(), 0, 32)
         self.__getChessPosition()
         self.__flushGame("./1Thumb.png")
 
@@ -30,10 +29,12 @@ class WeChatJump(object):
         image = Image.open('./1.png', 'r')
         image.thumbnail((394, 700))
         image.save("./1Thumb.png", format='png')
+        return image.size
 
     def __markThumb(self, top_x, top_y):
         image = Image.open('./1Thumb.png')
         draw = ImageDraw.Draw(image)
+        draw.rectangle([(335, 18), (372, 42)], fill='#aaaeb6')
         draw.line([top_x, top_y, self.pos_1, self.pos_2], fill=(0, 255, 0), width=2)
         draw.text((self.pos_1, self.pos_2), 'x=%s, y=%s' % (self.pos_1, self.pos_2), font=self.font, fill='#000000')
         image.save("./1Thumb.png", format='png')
@@ -42,8 +43,8 @@ class WeChatJump(object):
         img = cv2.imread('./1Thumb.png')
         try:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            circles1 = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 600, param1=100, param2=20, minRadius=10,
-                                        maxRadius=14)
+            circles1 = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 600, param1=100, param2=25, minRadius=9,
+                                        maxRadius=13)
             circles = np.uint16(np.around(circles1))
             circle = circles[0][0]
         except Exception as e:
