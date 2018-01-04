@@ -42,7 +42,7 @@ class WeChatJump(object):
         img = cv2.imread('./1Thumb.png')
         try:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            circles1 = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 600, param1=100, param2=20, minRadius=9,
+            circles1 = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 600, param1=100, param2=20, minRadius=10,
                                         maxRadius=14)
             circles = np.uint16(np.around(circles1))
             circle = circles[0][0]
