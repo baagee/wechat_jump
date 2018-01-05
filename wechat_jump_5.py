@@ -20,6 +20,7 @@ class WeChatJump(object):
         self.font = ImageFont.truetype("./EurostileLTStd.otf", 13)
         self.base_path = os.getcwd()
         self.screen = pygame.display.set_mode(self.__getScreen(), 0, 32)
+        pygame.display.set_caption('微信跳一跳辅助')
         self.__getChessPosition()
         self.__flushGame("./1Thumb.png")
 
