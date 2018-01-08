@@ -29,13 +29,14 @@ class WeChatJump(object):
         os.system('%s\\adb\\adb.exe pull /sdcard/1.png' % self.base_path)
         image = Image.open('./1.png', 'r')
         image.thumbnail((394, 700))
+        draw = ImageDraw.Draw(image)
+        draw.rectangle([(330, 13), (375, 45)], fill='#aaaeb6')
         image.save("./1Thumb.png", format='png')
         return image.size
 
     def __markThumb(self, top_x, top_y):
         image = Image.open('./1Thumb.png')
         draw = ImageDraw.Draw(image)
-        draw.rectangle([(335, 18), (372, 42)], fill='#aaaeb6')
         draw.line([top_x, top_y, self.pos_1, self.pos_2], fill=(0, 255, 0), width=2)
         draw.text((self.pos_1, self.pos_2), 'x=%s, y=%s' % (self.pos_1, self.pos_2), font=self.font, fill='#000000')
         image.save("./1Thumb.png", format='png')
